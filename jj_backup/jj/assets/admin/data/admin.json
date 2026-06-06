@@ -1,0 +1,358 @@
+[
+	{
+		"id": 1,
+		"title": "工作空间",
+		"icon": "layui-icon layui-icon-console",
+		"type": 0,
+		"children": [
+			{
+				"id": "10",
+				"title": "工作台",
+				"icon": "layui-icon layui-icon-console",
+				"type": 1,
+				"openType": "_iframe",
+				"href": "view.php"
+			},
+			{
+				"id": "cloud",
+				"title": "云端配置",
+				"icon": "layui-icon layui-icon-face-smile",
+				"type": 1,
+				"openType": "_iframe",
+				"href": "set.php?mod=cloud"
+			},
+			{
+				"id": "shopping",
+				"title": "应用市场",
+				"icon": "layui-icon layui-icon-console",
+				"type": 1,
+				"openType": "_iframe",
+				"href": "shoping.php"
+			}
+		]
+	},
+	{
+		"id": 2,
+		"title": "DNS管理",
+		"icon": "layui-icon layui-icon-auz",
+		"type": 0,
+		"children": [
+			{
+				"id": "icptype",
+				"title": "备案类型",
+				"icon": "layui-icon layui-icon-face-smile",
+				"type": 1,
+				"openType": "_iframe",
+				"href": "icptype.php"
+			},
+			{
+				"id": "key",
+				"title": "秘钥列表",
+				"icon": "layui-icon layui-icon-face-smile",
+				"type": 1,
+				"openType": "_iframe",
+				"href": "key.php"
+			},
+			{
+				"id": "api",
+				"title": "域名列表",
+				"icon": "layui-icon layui-icon-face-smile",
+				"type": 1,
+				"openType": "_iframe",
+				"href": "domain.php"
+			},
+			{
+				"id": "record",
+				"title": "解析列表",
+				"icon": "layui-icon layui-icon-face-smile",
+				"type": 1,
+				"openType": "_iframe",
+				"href": "record.php"
+			},
+			{
+				"id": "shop",
+				"title": "已购域名",
+				"icon": "layui-icon layui-icon-face-smile",
+				"type": 1,
+				"openType": "_iframe",
+				"href": "shop.php"
+			}
+			,
+			{
+				"id": "anomaly",
+				"title": "异常解析",
+				"icon": "layui-icon layui-icon-face-smile",
+				"type": 1,
+				"openType": "_iframe",
+				"href": "anomaly.php"
+			}
+		]
+	},
+	{
+		"id": 3,
+		"title": "系统管理",
+		"icon": "layui-icon layui-icon-set",
+		"type": 0,
+		"children": [
+			{
+				"id": "site",
+				"title": "网站信息配置",
+				"icon": "layui-icon layui-icon-face-smile",
+				"type": 1,
+				"openType": "_iframe",
+				"href": "set.php?mod=site"
+			},
+			{
+				"id": "veridy",
+				"title": "人机验证配置",
+				"icon": "layui-icon layui-icon-face-smile",
+				"type": 1,
+				"openType": "_iframe",
+				"href": "set.php?mod=veridy"
+			},
+			{
+				"id": "certificate",
+				"title": "网站实名配置",
+				"icon": "layui-icon layui-icon-face-smile",
+				"type": 1,
+				"openType": "_iframe",
+				"href": "set.php?mod=certificate"
+			},
+			{
+				"id": "mail",
+				"title": "邮件信息配置",
+				"icon": "layui-icon layui-icon-face-smile",
+				"type": 1,
+				"openType": "_iframe",
+				"href": "set.php?mod=mail"
+			},
+			{
+				"id": "email",
+				"title": "邮件群发通知",
+				"icon": "layui-icon layui-icon-face-smile",
+				"type": 1,
+				"openType": "_iframe",
+				"href": "email.php"
+			},
+			{
+				"id": "notice",
+				"title": "通知内容配置",
+				"icon": "layui-icon layui-icon-face-smile",
+				"type": 1,
+				"openType": "_iframe",
+				"href": "notice.php"
+			},
+			{
+				"id": "kuaijie",
+				"title": "快捷登录配置",
+				"icon": "layui-icon layui-icon-face-smile",
+				"type": 1,
+				"openType": "_iframe",
+				"href": "set.php?mod=kuaijie"
+			},
+			{
+				"id": "cron",
+				"title": "计划任务配置",
+				"icon": "layui-icon layui-icon-face-smile",
+				"type": 1,
+				"openType": "_iframe",
+				"href": "set.php?mod=cron"
+			},
+			{
+				"id": "iptype",
+				"title": "IP地址获取配置",
+				"icon": "layui-icon layui-icon-face-smile",
+				"type": 1,
+				"openType": "_iframe",
+				"href": "set.php?mod=iptype"
+			},
+		
+			{
+				"id": "yqlink",
+				"title": "友情链接配置",
+				"icon": "layui-icon layui-icon-face-smile",
+				"type": 1,
+				"openType": "_iframe",
+				"href": "yqlink.php"
+			},
+			{
+				"id": "gonggao",
+				"title": "网站公告配置",
+				"icon": "layui-icon layui-icon-face-smile",
+				"type": 1,
+				"openType": "_iframe",
+				"href": "gonggao.php"
+			},
+			{
+				"id": "ztrecord",
+				"title": "暂停解析配置",
+				"icon": "layui-icon layui-icon-face-smile",
+				"type": 1,
+				"openType": "_iframe",
+				"href": "set.php?mod=ztrecord"
+			},
+			{
+				"id": "clean",
+				"title": "网站数据清理",
+				"icon": "layui-icon layui-icon-face-smile",
+				"type": 1,
+				"openType": "_iframe",
+				"href": "clean.php"
+			},
+			{
+				"id": "template",
+				"title": "模板管理",
+				"icon": "layui-icon layui-icon-face-smile",
+				"type": 1,
+				"openType": "_iframe",
+				"href": "set.php?mod=template"
+			}
+		]
+	},
+	{
+		"id": 5,
+		"title": "支付管理",
+		"icon": "layui-icon layui-icon-rmb",
+		"type": 0,
+		"href": "",
+		"children": [
+			{
+				"id": "pay",
+				"title": "支付接口配置",
+				"icon": "layui-icon layui-icon-face-smile",
+				"type": 1,
+				"openType": "_iframe",
+				"href": "set.php?mod=pay"
+			},
+			{
+				"id": "order",
+				"title": "支付订单记录",
+				"icon": "layui-icon layui-icon-face-smile",
+				"type": 1,
+				"openType": "_iframe",
+				"href": "order.php"
+			}
+		]
+	},
+	
+	{
+		"id": 7,
+		"title": "用户管理",
+		"icon": "layui-icon layui-icon-username",
+		"type": 0,
+		"children": [
+			{
+				"id": "ulist",
+				"title": "用户列表",
+				"icon": "layui-icon layui-icon-face-smile",
+				"type": 1,
+				"openType": "_iframe",
+				"href": "ulist.php"
+			},
+			{
+				"id": "uservip",
+				"title": "会员管理",
+				"icon": "layui-icon layui-icon-face-smile",
+				"type": 1,
+				"openType": "_iframe",
+				"href": "uservip.php"
+			},
+			{
+				"id": "detailed",
+				"title": "余额明细",
+				"icon": "layui-icon layui-icon-face-smile",
+				"type": 1,
+				"openType": "_iframe",
+				"href": "detailed.php"
+			},
+			{
+				"id": "userlog",
+				"title": "用户日志",
+				"icon": "layui-icon layui-icon-face-smile",
+				"type": 1,
+				"openType": "_iframe",
+				"href": "userlog.php"
+			},
+			{
+				"id": "forensics",
+				"title": "一键取证",
+				"icon": "layui-icon layui-icon-face-smile",
+				"type": 1,
+				"openType": "_iframe",
+				"href": "forensics.php"
+			},
+			{
+				"id": "messages",
+				"title": "发送站内信",
+				"icon": "layui-icon layui-icon-face-smile",
+				"type": 1,
+				"openType": "_iframe",
+				"href": "messages.php"
+			}
+		]
+	},
+	{
+		"id": 8,
+		"title": "数据管理",
+		"icon": "layui-icon layui-icon-engine",
+		"type": 0,
+		"href": "",
+		"children": [
+			{
+				"id": "dbsql",
+				"title": "数据库工具",
+				"icon": "layui-icon layui-icon-face-smile",
+				"type": 1,
+				"openType": "_iframe",
+				"href": "dbsql.php"
+			},
+			{
+				"id": "dbsqls",
+				"title": "数据语句执行",
+				"icon": "layui-icon layui-icon-face-smile",
+				"type": 1,
+				"openType": "_iframe",
+				"href": "dbsql.php?mod=dbsql"
+			}
+		]
+	},
+	{
+		"id": 9,
+		"title": "工单管理",
+		"icon": "layui-icon layui-icon-survey",
+		"type": 0,
+		"href": "",
+		"children": [
+			{
+				"id": "work",
+				"title": "工单配置",
+				"icon": "layui-icon layui-icon-face-smile",
+				"type": 1,
+				"openType": "_iframe",
+				"href": "set.php?mod=gongdan"
+			},
+			{
+				"id": "workorder",
+				"title": "工单列表",
+				"icon": "layui-icon layui-icon-face-smile",
+				"type": 1,
+				"openType": "_iframe",
+				"href": "workorder.php"
+			}
+		]
+	},
+	{
+		"id": "log",
+		"title": "系统操作日志",
+		"icon": "layui-icon layui-icon-list",
+		"type": 1,
+		"href": "log.php"
+	},
+	{
+		"id": "update",
+		"title": "关于系统",
+		"icon": "layui-icon layui-icon-upload-drag",
+		"type": 1,
+		"href": "about.php"
+	}
+]

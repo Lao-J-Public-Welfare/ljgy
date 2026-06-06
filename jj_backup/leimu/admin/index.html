@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>订单管理 · 电竞俱乐部</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #f5f5f5;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #c0392b;
+            margin-bottom: 20px;
+        }
+        .login-box {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 400px;
+            margin: 100px auto;
+            text-align: center;
+        }
+        .login-box input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .login-box button {
+            background: #c0392b;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 30px;
+            cursor: pointer;
+            width: 100%;
+        }
+        table {
+            width: 100%;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        th {
+            background: #1a1a1a;
+            color: white;
+        }
+        .status-pending {
+            color: #e67e22;
+        }
+        .status-done {
+            color: #27ae60;
+        }
+        button.small {
+            background: #c0392b;
+            color: white;
+            border: none;
+            padding: 4px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        button.small:hover {
+            background: #a83226;
+        }
+        .logout {
+            float: right;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container" id="app">
+    <div id="loginPanel">
+        <div class="login-box">
+            <h2>管理登录</h2>
+            <input type="password" id="adminPwd" placeholder="密码">
+            <button onclick="login()">登录</button>
+        </div>
+    </div>
+    <div id="adminPanel" style="display:none;">
+        <button class="logout" onclick="logout()">退出</button>
+        <h1>订单管理</h1>
+        <table id="ordersTable">
+            <thead>
+                <tr><th>ID</th><th>配置</th><th>价格</th><th>状态</th><th>时间</th><th>操作</th></tr>
+            </thead>
+            <tbody id="ordersList"></tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+const ADMIN_PASSWORD = 'jongn2026';
+
+async function login() {
+    const pwd = document.getElementById('adminPwd').value;
+    if (pwd === ADMIN_PASSWORD) {
+        document.getElementById('loginPanel').style.display = 'none';
+        document.getElementById('adminPanel').style.display = 'block';
+        loadOrders();
+        setInterval(loadOrders, 30000);
+    } else {
+        alert('密码错误');
+    }
+}
+
+function logout() {
+    document.getElementById('loginPanel').style.display = 'block';
+    document.getElementById('adminPanel').style.display = 'none';
+}
+
+async function loadOrders() {
+    const res = await fetch('/name/api/orders.php');
+    const data = await res.json();
+    if (data.success) {
+        const tbody = document.getElementById('ordersList');
+        tbody.innerHTML = '';
+        data.orders.forEach(order => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${order.id}</td>
+                <td style="max-width:300px; word-break:break-all;">${escapeHtml(order.config)}</td>
+                <td>${escapeHtml(order.price)}</td>
+                <td class="${order.status === 0 ? 'status-pending' : 'status-done'}">${order.status === 0 ? '待处理' : '已处理'}</td>
+                <td>${order.created_at}</td>
+                <td><button class="small" onclick="markDone(${order.id})">标记已处理</button></td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+}
+
+async function markDone(id) {
+    const res = await fetch('/name/api/orders.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id, action: 'done' })
+    });
+    const data = await res.json();
+    if (data.success) {
+        loadOrders();
+    } else {
+        alert('操作失败');
+    }
+}
+
+function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/[&<>]/g, function(m) {
+        if (m === '&') return '&amp;';
+        if (m === '<') return '&lt;';
+        if (m === '>') return '&gt;';
+        return m;
+    });
+}
+</script>
+</body>
+</html>

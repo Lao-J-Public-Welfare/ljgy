@@ -1,0 +1,136 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+    background: #f0f4f8;
+    color: #1e2b3c;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+header {
+    background: #0f2b5c;
+    color: white;
+    padding: 1rem 2rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 30px;
+    transition: background 0.3s;
+}
+nav ul li a:hover {
+    background: #2b4b8f;
+}
+main {
+    flex: 1;
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 28px;
+    box-shadow: 0 20px 30px -10px rgba(0,20,40,0.15);
+    width: 90%;
+}
+h1 {
+    color: #0f2b5c;
+    margin-bottom: 1.5rem;
+    border-left: 6px solid #3b82f6;
+    padding-left: 1rem;
+}
+h2 {
+    margin: 2rem 0 1rem;
+    color: #1e3a8a;
+}
+p {
+    margin-bottom: 1.2rem;
+}
+.overview-list {
+    list-style: none;
+    background: #f9f9fc;
+    padding: 1.5rem;
+    border-radius: 20px;
+}
+.overview-list li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+.overview-list li:last-child {
+    border-bottom: none;
+}
+.timeline {
+    margin: 2rem 0;
+}
+.timeline-item {
+    display: flex;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px dashed #cbd5e1;
+}
+.year {
+    font-weight: 700;
+    width: 100px;
+    color: #2563eb;
+}
+.desc {
+    flex: 1;
+}
+.download-section {
+    background: #f8fafd;
+    border-radius: 20px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+}
+.download-section h2 {
+    margin-top: 0;
+    border-left: 4px solid #2563eb;
+    padding-left: 0.8rem;
+}
+.download-section ul {
+    list-style: none;
+}
+.download-section li {
+    margin: 0.8rem 0;
+}
+.download-section a {
+    color: #1e3a8a;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.3rem 1rem;
+    background: #e6f0ff;
+    border-radius: 40px;
+    display: inline-block;
+    transition: background 0.2s;
+}
+.download-section a:hover {
+    background: #2563eb;
+    color: white;
+}
+.note {
+    background: #fff3cd;
+    border: 1px solid #ffeeba;
+    padding: 1rem;
+    border-radius: 12px;
+    margin-top: 2rem;
+}
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    background: #0f2b5c;
+    color: white;
+    margin-top: auto;
+}

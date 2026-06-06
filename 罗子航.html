@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>罗子航</title>
+    <style>
+        /* 打印样式优化 */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: '宋体', SimSun, 'Times New Roman', serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+            margin: 0;
+        }
+        /* 打印容器：模拟A4纸效果 */
+        .print-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 40px 35px;
+            border-radius: 4px;
+        }
+        /* 大标题：作文集 */
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            letter-spacing: 4px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 15px;
+            font-family: '黑体', 'Microsoft YaHei', sans-serif;
+        }
+        /* 作文网格布局：两列 */
+        .essay-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px 35px;
+            page-break-inside: avoid;
+        }
+        /* 单篇作文卡片 */
+        .essay-card {
+            break-inside: avoid;          /* 避免卡片内分页 */
+            page-break-inside: avoid;      /* 兼容老式浏览器 */
+            margin-bottom: 15px;
+            border: 1px solid #e0e0e0;
+            padding: 18px 18px 12px 18px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+        }
+        /* 作文标题 */
+        .essay-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #aaa;
+            font-family: '黑体', 'Microsoft YaHei', sans-serif;
+            color: #1a3e6f;
+        }
+        /* 小标题样式 */
+        .subtitle {
+            font-size: 17px;
+            font-weight: 600;
+            margin: 15px 0 5px 0;
+            color: #b23b2c;
+            font-family: '楷体', 'KaiTi', serif;
+            border-left: 5px solid #b23b2c;
+            padding-left: 8px;
+        }
+        /* 正文段落 */
+        .essay-text {
+            font-size: 15px;
+            line-height: 1.65;
+            text-indent: 2em;
+            margin: 8px 0;
+            font-family: '宋体', SimSun, serif;
+            text-align: justify;
+            word-spacing: 1px;
+        }
+        /* 正文中如果有不需要缩进的（比如引用），可以另设，但这里统一缩进 */
+        .essay-text:first-of-type {
+            margin-top: 5px;
+        }
+        /* 作者/备注（可选），此处不加 */
+        .page-break-avoid {
+            break-inside: avoid;
+        }
+        /* 打印时隐藏背景色和阴影，更清晰 */
+        @media print {
+            body {
+                background-color: white;
+                padding: 0;
+            }
+            .print-container {
+                max-width: 100%;
+                box-shadow: none;
+                padding: 20px 25px;
+                border-radius: 0;
+            }
+            .essay-card {
+                border: 1px solid #ccc;
+                box-shadow: none;
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+            h1 {
+                color: black;
+                border-bottom: 2px solid black;
+            }
+            .subtitle {
+                color: black;
+                border-left: 5px solid #333;  /* 打印时深灰色 */
+            }
+        }
+        /* 针对小屏幕：一列显示 */
+        @media (max-width: 700px) {
+            .essay-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        /* 页脚页码（建议打印时浏览器自带） */
+        .footer-note {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 13px;
+            color: #555;
+            border-top: 1px dashed #aaa;
+            padding-top: 12px;
+        }
+    </style>
+</head>
+<body>
+<p>罗子航</p>
+<p>罗子航</p>
+<p>罗子航</p>
+<p>罗子航</p>
+</html>

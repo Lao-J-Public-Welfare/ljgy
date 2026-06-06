@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>ROOT</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #000;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Courier New', 'Fira Code', monospace;
+        }
+        .terminal {
+            width: 90%;
+            max-width: 900px;
+            background: #0a0a0a;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0,255,0,0.2);
+            border: 1px solid #2a2a2a;
+        }
+        .screen {
+            background: #000;
+            padding: 20px;
+            border-radius: 8px;
+            min-height: 500px;
+            max-height: 70vh;
+            overflow-y: auto;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #0f0;
+            text-shadow: 0 0 3px #0f0;
+        }
+        .line {
+            margin-bottom: 6px;
+            white-space: pre-wrap;
+            word-break: break-word;
+            border-left: 2px solid #0f0;
+            padding-left: 12px;
+            opacity: 0;
+            animation: fadeIn 0.2s forwards;
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 18px;
+            background-color: #0f0;
+            vertical-align: middle;
+            margin-left: 4px;
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #111;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0f0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+<div class="terminal">
+    <div class="screen" id="terminalScreen">
+        <div><span style="color:#aaa;">[ROOT] 终端 v1.0</span></div>
+        <div id="logArea"></div>
+        <div><span id="cursorSpan"></span><span class="cursor"></span></div>
+    </div>
+</div>
+
+<script>
+    const logArea = document.getElementById('logArea');
+    
+    // 自检步骤列表
+    const steps = [
+        { text: "> 正在准备 root 环境 ...", delay: 400 },
+        { text: "> [OK] 内核模块加载", delay: 350 },
+        { text: "> [OK] 安全策略已载入", delay: 350 },
+        { text: "> [OK] 网络协议栈初始化", delay: 400 },
+        { text: "> [OK] 内存分页正常", delay: 380 },
+        { text: "> [OK] 存储设备已挂载", delay: 400 },
+        { text: "> [OK] CPU 调度器在线", delay: 350 },
+        { text: "> 正在扫描系统组件 ...", delay: 400 },
+        { text: "> [组件] 图形界面接口", delay: 350 },
+        { text: "> [组件] 输入设备驱动", delay: 350 },
+        { text: "> [组件] 音频服务", delay: 380 },
+        { text: "> [组件] 网络代理模块", delay: 400 },
+        { text: "> 正在加载功能模块 ...", delay: 450 },
+        { text: "> [功能] 文件系统权限", delay: 350 },
+        { text: "> [功能] 进程管理器", delay: 380 },
+        { text: "> [功能] 用户认证服务", delay: 400 },
+        { text: "> [功能] 远程访问隧道", delay: 400 },
+        { text: "> 自检完成", delay: 350 },
+        { text: "> 正在提升权限 ...", delay: 450 },
+        { text: "> [SUCCESS] ROOT 权限已获得", delay: 500 },
+        { text: "> 欢迎回来，管理员。", delay: 400 }
+    ];
+
+    let index = 0;
+
+    function addLine(text) {
+        const lineDiv = document.createElement('div');
+        lineDiv.className = 'line';
+        lineDiv.innerText = text;
+        logArea.appendChild(lineDiv);
+        const screen = document.getElementById('terminalScreen');
+        screen.scrollTop = screen.scrollHeight;
+    }
+
+    function runNext() {
+        if (index >= steps.length) {
+            return;
+        }
+        const step = steps[index];
+        addLine(step.text);
+        index++;
+        setTimeout(runNext, step.delay);
+    }
+
+    runNext();
+</script>
+</body>
+</html>

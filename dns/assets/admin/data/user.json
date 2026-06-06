@@ -1,0 +1,132 @@
+[
+	{
+		"id": 10,
+		"title": "工作台",
+		"icon": "layui-icon layui-icon-console",
+		"type": 1,
+		"href": "view.php"
+	},
+	{
+		"id": 1,
+		"title": "购买会员",
+		"icon": "layui-icon layui-icon-cart",
+		"type": 1,
+		"href": "svip.php"
+	},
+	{
+		"id": 2,
+		"title": "解析管理",
+		"icon": "layui-icon layui-icon-auz",
+		"type": 0,
+		"children": [
+			{
+				"id": "record",
+				"title": "解析记录",
+				"icon": "layui-icon layui-icon-face-smile",
+				"type": 1,
+				"openType": "_iframe",
+				"href": "record.php"
+			},
+			{
+				"id": "domain",
+				"title": "域名列表",
+				"icon": "layui-icon layui-icon-face-smile",
+				"type": 1,
+				"openType": "_iframe",
+				"href": "domain.php"
+			}
+		]
+	},
+	{
+		"id": 4,
+		"title": "域名商城",
+		"icon": "layui-icon layui-icon-auz",
+		"type": 0,
+		"children": [
+			{
+				"id": "shoprecord",
+				"title": "解析记录",
+				"icon": "layui-icon layui-icon-face-smile",
+				"type": 1,
+				"openType": "_iframe",
+				"href": "shoprecord.php"
+			},
+			{
+				"id": "shopdomain",
+				"title": "我的域名",
+				"icon": "layui-icon layui-icon-face-smile",
+				"type": 1,
+				"openType": "_iframe",
+				"href": "shopdomain.php"
+			},
+			{
+				"id": "shop",
+				"title": "域名商城",
+				"icon": "layui-icon layui-icon-face-smile",
+				"type": 1,
+				"openType": "_iframe",
+				"href": "shop.php"
+			}
+		]
+	},
+	{
+		"id": 3,
+		"title": "账号充值",
+		"icon": "layui-icon layui-icon-rmb",
+		"type": 1,
+		"href": "money.php"
+	},
+	{
+		"id": 5,
+		"title": "明细查看",
+		"icon": "layui-icon layui-icon-list",
+		"type": 0,
+		"children": [
+			{
+				"id": "detailed",
+				"title": "余额明细",
+				"icon": "layui-icon layui-icon-face-smile",
+				"type": 1,
+				"openType": "_iframe",
+				"href": "detailed.php"
+			},
+			{
+				"id": "other",
+				"title": "充值明细",
+				"icon": "layui-icon layui-icon-face-smile",
+				"type": 1,
+				"openType": "_iframe",
+				"href": "order.php"
+			},
+			{
+				"id": "userlog",
+				"title": "日志明细",
+				"icon": "layui-icon layui-icon-face-smile",
+				"type": 1,
+				"openType": "_iframe",
+				"href": "userlog.php"
+			}
+		]
+	},
+	{
+		"id": 6,
+		"title": "推广返佣",
+		"icon": "layui-icon layui-icon-user",
+		"type": 1,
+		"href": "promotion.php"
+	},
+	{
+		"id": 7,
+		"title": "反馈工单",
+		"icon": "layui-icon layui-icon-survey",
+		"type": 1,
+		"href": "workorder.php"
+	},
+	{
+		"id": 8,
+		"title": "站内信",
+		"icon": "layui-icon layui-icon-notice",
+		"type": 1,
+		"href": "messages.php"
+	}
+]

@@ -1,0 +1,129 @@
+<?php
+require_once 'config.php';
+
+if (!isAdmin()) {
+    redirect('index.php');
+}
+
+$status = $_GET['status'] ?? 'pending';
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$per_page = 20;
+$offset = ($page - 1) * $per_page;
+
+$stmt = $pdo->prepare("
+    SELECT r.*, u.username as reporter_name,
+           CASE
+               WHEN r.target_type = 'post' THEN (SELECT title FROM posts WHERE id = r.target_id)
+               WHEN r.target_type = 'comment' THEN (SELECT content FROM comments WHERE id = r.target_id)
+               ELSE (SELECT username FROM users WHERE id = r.target_id)
+           END as target_title
+    FROM reports r
+    JOIN users u ON r.reporter_id = u.id
+    WHERE r.status = ?
+    ORDER BY r.created_at DESC
+    LIMIT ? OFFSET ?
+");
+$stmt->execute([$status, (int)$per_page, (int)$offset]);
+$reports = $stmt->fetchAll();
+
+$total = $pdo->prepare("SELECT COUNT(*) FROM reports WHERE status = ?");
+$total->execute([$status]);
+$total_pages = ceil($total->fetchColumn() / $per_page);
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>举报管理 - 牢J公益</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #f5f5f5; font-family: sans-serif; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .logo { font-size: 24px; font-weight: bold; color: #c0392b; }
+        .nav a { margin-left: 20px; color: #666; text-decoration: none; }
+        .nav a:hover { color: #c0392b; }
+        .card { background: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); padding: 30px; }
+        h1 { margin-bottom: 20px; }
+        .tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+        .tab { padding: 8px 16px; background: #e0e0e0; border-radius: 20px; cursor: pointer; }
+        .tab a { text-decoration: none; color: #333; }
+        .tab.active { background: #c0392b; }
+        .tab.active a { color: white; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #eee; }
+        th { background: #f5f5f5; }
+        .btn { padding: 4px 12px; border: none; border-radius: 20px; cursor: pointer; font-size: 12px; }
+        .btn-resolve { background: #2c5a2e; color: white; }
+        .btn-dismiss { background: #999; color: white; }
+        .btn-delete { background: #c0392b; color: white; }
+        .footer { text-align: center; margin-top: 40px; padding: 20px; color: #999; border-top: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="logo">牢J公益</div>
+        <div class="nav">
+            <a href="index.php">首页</a>
+            <a href="new_post.php">发帖</a>
+            <a href="profile.php"><?php echo $_SESSION['username']; ?></a>
+            <a href="admin.php">管理</a>
+            <a href="logout.php">退出</a>
+        </div>
+    </div>
+    <div class="card">
+        <h1>举报管理</h1>
+        <div class="tabs">
+            <div class="tab <?php echo $status == 'pending' ? 'active' : ''; ?>"><a href="?status=pending">待处理</a></div>
+            <div class="tab <?php echo $status == 'resolved' ? 'active' : ''; ?>"><a href="?status=resolved">已处理</a></div>
+            <div class="tab <?php echo $status == 'dismissed' ? 'active' : ''; ?>"><a href="?status=dismissed">已驳回</a></div>
+        </div>
+        <table>
+            <thead><tr><th>ID</th><th>举报人</th><th>类型</th><th>内容</th><th>原因</th><th>时间</th><th>操作</th></tr></thead>
+            <tbody>
+                <?php foreach ($reports as $report): ?>
+                <tr>
+                    <td><?php echo $report['id']; ?></td>
+                    <td><?php echo htmlspecialchars($report['reporter_name']); ?></td>
+                    <td><?php echo $report['target_type']; ?></td>
+                    <td><a href="<?php echo $report['target_type'] == 'post' ? 'post.php?id=' . $report['target_id'] : '#'; ?>" target="_blank"><?php echo htmlspecialchars(mb_substr($report['target_title'] ?? '', 0, 30)); ?></a></td>
+                    <td><?php echo htmlspecialchars($report['reason']); ?></td>
+                    <td><?php echo date('Y-m-d H:i', strtotime($report['created_at'])); ?></td>
+                    <td>
+                        <?php if ($status == 'pending'): ?>
+                            <button class="btn btn-resolve" onclick="handle(<?php echo $report['id']; ?>, 'resolved')">通过</button>
+                            <button class="btn btn-dismiss" onclick="handle(<?php echo $report['id']; ?>, 'dismissed')">驳回</button>
+                        <?php endif; ?>
+                        <button class="btn btn-delete" onclick="handle(<?php echo $report['id']; ?>, 'delete')">删除</button>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+        <?php if ($total_pages > 1): ?>
+        <div style="margin-top:20px; text-align:center;">
+            <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                <a href="?status=<?php echo $status; ?>&page=<?php echo $i; ?>" style="margin:0 5px; <?php echo $i == $page ? 'font-weight:bold;' : ''; ?>"><?php echo $i; ?></a>
+            <?php endfor; ?>
+        </div>
+        <?php endif; ?>
+    </div>
+    <div class="footer">© 2026 牢J公益</div>
+</div>
+<script>
+function handle(id, action) {
+    let msg = action == 'resolved' ? '确定通过？' : (action == 'dismissed' ? '确定驳回？' : '确定删除？');
+    if (!confirm(msg)) return;
+    fetch('report_handle.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: 'id=' + id + '&status=' + action
+    }).then(res => res.json()).then(data => {
+        if (data.success) location.reload();
+        else alert('操作失败');
+    });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>匿名论坛</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: -apple-system, sans-serif;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .header {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .main {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+        }
+        .form-group { margin-bottom: 20px; }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .form-group textarea { min-height: 120px; }
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 5px;
+            width: 100%;
+            cursor: pointer;
+        }
+        .post {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #667eea;
+        }
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .post-author { font-weight: bold; color: #667eea; }
+        .post-date { color: #999; font-size: 12px; }
+        .post-category {
+            display: inline-block;
+            background: #e2e8f0;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            margin: 10px 0;
+        }
+        .post-title { font-size: 18px; margin: 10px 0; }
+        .post-content { color: #555; line-height: 1.6; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>匿名论坛</h1>
+            <p>自由交流 · 匿名发帖</p>
+        </div>
+        <div class="main">
+            <h2>发布新帖</h2>
+            <form id="postForm">
+                <div class="form-group">
+                    <input type="text" id="title" placeholder="标题" required>
+                </div>
+                <div class="form-group">
+                    <select id="category" required>
+                        <option value="">选择分类</option>
+                        <option value="技术讨论">技术讨论</option>
+                        <option value="情感树洞">情感树洞</option>
+                        <option value="生活分享">生活分享</option>
+                        <option value="其他">其他</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <textarea id="content" placeholder="内容" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="anonymous"> 匿名发布
+                    </label>
+                </div>
+                <button type="submit">发布帖子</button>
+            </form>
+            
+            <div style="margin-top: 50px;">
+                <h2>最新帖子</h2>
+                <div id="postsList"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const CURRENT_USERNAME = '用户' + Math.floor(Math.random() * 1000);
+        
+        async function loadPosts() {
+            const res = await fetch('get_posts.php');
+            const data = await res.json();
+            const postsList = document.getElementById('postsList');
+            postsList.innerHTML = '';
+            
+            if (data.success && data.data.length > 0) {
+                data.data.forEach(post => {
+                    const div = document.createElement('div');
+                    div.className = 'post';
+                    div.innerHTML = `
+                        <div class="post-header">
+                            <span class="post-author">${post.anonymous ? '匿名用户' : post.author}</span>
+                            <span class="post-date">${post.date}</span>
+                        </div>
+                        <div class="post-category">${post.category}</div>
+                        <div class="post-title">${post.title}</div>
+                        <div class="post-content">${post.content}</div>
+                    `;
+                    postsList.appendChild(div);
+                });
+            } else {
+                postsList.innerHTML = '<p style="text-align: center; color: #999;">暂无帖子</p>';
+            }
+        }
+
+        document.getElementById('postForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const postData = {
+                title: document.getElementById('title').value,
+                content: document.getElementById('content').value,
+                category: document.getElementById('category').value,
+                author: CURRENT_USERNAME,
+                anonymous: document.getElementById('anonymous').checked
+            };
+
+            const res = await fetch('add_post.php', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(postData)
+            });
+
+            if (res.ok) {
+                alert('发布成功！');
+                document.getElementById('postForm').reset();
+                loadPosts();
+            }
+        });
+
+        loadPosts();
+    </script>
+</body>
+</html>
