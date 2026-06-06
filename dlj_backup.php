@@ -3,7 +3,7 @@
 session_start();
 
 
-$db = new PDO('mysql:host=localhost;dbname=shortlink_db;charset=utf8mb4', 'root', 'JONGN123');
+$db = new PDO('mysql:host=localhost;dbname=shortlink_db;charset=utf8mb4', 'root', 'cscscs);
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['url'])) {

@@ -1,7 +1,7 @@
 <?php
 $db_host = 'localhost';
 $db_user = 'root';
-$db_pass = 'JONGN123';
+$db_pass = 'cscscs;
 $db_name = 'ljgy_links';
 
 try {

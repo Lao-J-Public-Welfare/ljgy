@@ -9,7 +9,7 @@ define('CF_API_TOKEN', 'cfut_2a2RvR2k9l3XdJo3hi9lsYUqVqWjqilpuYfSFLHs20c4f4f7');
 
 $db_host = 'localhost';
 $db_user = 'root';
-$db_pass = 'JONGN123';
+$db_pass = 'cscscs;
 $db_name = 'dns_system';
 
 try {

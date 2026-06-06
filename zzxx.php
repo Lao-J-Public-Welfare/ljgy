@@ -9,10 +9,10 @@ if (isset($_GET['logout'])) {
 }
 
 
-$admin_password = 'JONGN123';
+$admin_password = 'cscscs;
 
 
-$db = new PDO('mysql:host=localhost;dbname=laojing_forum_new;charset=utf8mb4', 'root', 'JONGN123');
+$db = new PDO('mysql:host=localhost;dbname=laojing_forum_new;charset=utf8mb4', 'root', 'cscscs);
 
 
 $db->exec("
