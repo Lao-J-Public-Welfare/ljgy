@@ -1,1 +1,0 @@
-../../../../../../javascript/codemirror/mode/xml/xml.js

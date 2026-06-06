@@ -1,1 +1,0 @@
-../../../../javascript/jquery-tablesorter/js/jquery.tablesorter.js
